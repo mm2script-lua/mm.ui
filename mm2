@@ -59,7 +59,7 @@ local v6 = CreateObject("Frame", {
     ClipsDescendants = true,
     Position = UDim2.new(0.5, 0, 0.5, 0),
     AnchorPoint = Vector2.new(0.5, 0.5),
-BackgroundTransparency = 
+    BackgroundTransparency = 0.25,
     Size = UDim2.new(0, 0, 0, 0)
 });
 v4(12, v6);
