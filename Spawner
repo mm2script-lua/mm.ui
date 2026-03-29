@@ -1,0 +1,304 @@
+shared.LoaderTitle = "Loading Script please wait...";
+shared.LoaderKeyFrames = {
+    [1] = {15, 10},
+    [2] = {10, 30},
+    [3] = {25, 60},
+    [4] = {30, 100}
+};
+
+local v2 = {
+    LoaderData = {
+        Name = shared.LoaderTitle or "A Loader",
+        Colors = shared.LoaderColors or {
+            Main = Color3.fromRGB(18, 18, 24),
+            Topic = Color3.fromRGB(200, 200, 200),
+            Title = Color3.fromRGB(255, 255, 255),
+            LoaderBackground = Color3.fromRGB(40, 40, 40),
+            LoaderSplash = Color3.fromRGB(30, 110, 255)
+        }
+    },
+    Keyframes = shared.LoaderKeyFrames or {
+      [1] = {15, 10},
+      [2] = {10, 30},
+      [3] = {25, 60},
+      [4] = {30, 100}
+    }
+};
+
+-- Aligned to match the index of the keyframes
+local v3 = {
+    [1] = "Connecting to server...",
+    [2] = "Bypassing anti-cheat...",
+    [3] = "Fetching item data...",
+    [4] = "Ready!"
+};
+
+
+function TweenObject(v178, v179, v180)
+    game:GetService("TweenService"):Create(v178, TweenInfo.new(v179, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), v180):Play();
+end
+
+function CreateObject(v181, v182)
+    local v183 = Instance.new(v181);
+    local v184;
+    for v416, v417 in pairs(v182) do
+        if (v416 ~= "Parent") then
+            v183[v416] = v417;
+        else
+            v184 = v417;
+        end
+    end
+    v183.Parent = v184;
+    return v183;
+end
+
+local function v4(v186, v187)
+    local v188 = Instance.new("UICorner");
+    v188.CornerRadius = UDim.new(0, v186);
+    v188.Parent = v187;
+end
+
+-- Using pcall to fallback to PlayerGui if CoreGui is restricted by executor
+local targetGuiParent
+pcall(function() targetGuiParent = game:GetService("CoreGui") end)
+if not targetGuiParent then targetGuiParent = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui") end
+
+local v5 = CreateObject("ScreenGui", {
+    Name = "Core",
+    Parent = targetGuiParent
+});
+
+local v6 = CreateObject("Frame", {
+    Name = "Main",
+    Parent = v5,
+    BackgroundColor3 = v2.LoaderData.Colors.Main,
+    BorderSizePixel = 0,
+    ClipsDescendants = true,
+    Position = UDim2.new(0.5, 0, 0.5, 0),
+    AnchorPoint = Vector2.new(0.5, 0.5),
+    Size = UDim2.new(0, 0, 0, 0)
+});
+v4(12, v6);
+
+local v7 = CreateObject("ImageLabel", {
+    Name = "UserImage",
+    Parent = v6,
+    BackgroundTransparency = 1,
+    Image = "rbxassetid://123958108501740",
+    Position = UDim2.new(0, 15, 0, 10),
+    Size = UDim2.new(0, 50, 0, 50)
+});
+v4(25, v7);
+
+local v8 = CreateObject("TextLabel", {
+    Name = "UserName",
+    Parent = v6,
+    BackgroundTransparency = 1,
+    Text = "Youtube: KaiScripts",
+    Position = UDim2.new(0, 75, 0, 10),
+    Size = UDim2.new(0, 200, 0, 50),
+    Font = Enum.Font.GothamBold,
+    TextColor3 = v2.LoaderData.Colors.Title,
+    TextSize = 14,
+    TextXAlignment = Enum.TextXAlignment.Left
+});
+
+local v9 = CreateObject("TextLabel", {
+    Name = "Top",
+    TextTransparency = 1,
+    Parent = v6,
+    BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+    BackgroundTransparency = 1,
+    Position = UDim2.new(0, 30, 0, 70),
+    Size = UDim2.new(0, 301, 0, 20),
+    Font = Enum.Font.Gotham,
+    Text = "Loader",
+    TextColor3 = v2.LoaderData.Colors.Topic,
+    TextSize = 10,
+    TextXAlignment = Enum.TextXAlignment.Left
+});
+
+local v10 = CreateObject("TextLabel", {
+    Name = "Title",
+    Parent = v6,
+    TextTransparency = 1,
+    BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+    BackgroundTransparency = 1,
+    Position = UDim2.new(0, 35, 0, 90),
+    Size = UDim2.new(0, 301, 0, 46),
+    Font = Enum.Font.Gotham,
+    RichText = true,
+    Text = "<b>" .. v2.LoaderData.Name .. "</b>",
+    TextColor3 = v2.LoaderData.Colors.Title,
+    TextSize = 14,
+    TextXAlignment = Enum.TextXAlignment.Left
+});
+
+local v11 = CreateObject("Frame", {
+    Name = "BG",
+    Parent = v6,
+    AnchorPoint = Vector2.new(0.5, 0),
+    BackgroundTransparency = 1,
+    BackgroundColor3 = v2.LoaderData.Colors.LoaderBackground,
+    BorderSizePixel = 0,
+    Position = UDim2.new(0.5, 0, 0, 70),
+    Size = UDim2.new(0.8500000238418579, 0, 0, 24)
+});
+v4(8, v11);
+
+local v12 = CreateObject("Frame", {
+    Name = "Progress",
+    Parent = v11,
+    BackgroundColor3 = v2.LoaderData.Colors.LoaderSplash,
+    BackgroundTransparency = 1,
+    BorderSizePixel = 0,
+    Size = UDim2.new(0, 0, 0, 24)
+});
+v4(8, v12);
+
+local v13 = CreateObject("TextLabel", {
+    Name = "StepLabel",
+    Parent = v6,
+    BackgroundTransparency = 15,
+    Position = UDim2.new(0.5, 0, 1, -38),
+    Size = UDim2.new(1, -20, 0, 20),
+    Font = Enum.Font.Gotham,
+    Text = "",
+    TextColor3 = v2.LoaderData.Colors.Topic,
+    TextSize = 14,
+    TextXAlignment = Enum.TextXAlignment.Center,
+    AnchorPoint = Vector2.new(0.5, 0.5)
+});
+
+function UpdateStepText(v191)
+    v13.Text = v3[v191] or "";
+end
+
+function UpdatePercentage(v193, v194)
+    TweenObject(v12, 0.5, {Size = UDim2.new(v193 / 100, 0, 0, 24)});
+    UpdateStepText(v194);
+end
+
+TweenObject(v6, 0.25, {Size = UDim2.new(0, 346, 0, 121)});
+task.wait(0.25);
+TweenObject(v9, 0.5, {TextTransparency = 0});
+TweenObject(v10, 0.5, {TextTransparency = 0});
+TweenObject(v11, 0.5, {BackgroundTransparency = 0});
+TweenObject(v12, 0.5, {BackgroundTransparency = 0});
+
+for v195, v196 in pairs(v2.Keyframes) do
+    task.wait(v196[1]);
+    UpdatePercentage(v196[2], v195);
+end
+
+UpdatePercentage(100, 4);
+task.wait(0.5);
+TweenObject(v9, 0.5, {TextTransparency = 1});
+TweenObject(v10, 0.5, {TextTransparency = 1});
+TweenObject(v11, 0.5, {BackgroundTransparency = 1});
+TweenObject(v12, 0.5, {BackgroundTransparency = 1});
+task.wait(0.5);
+TweenObject(v6, 0.25, {Size = UDim2.new(0, 0, 0, 0)});
+task.wait(0.25);
+v5:Destroy();
+
+
+local ReplicatedStorage = game:GetService('ReplicatedStorage')
+local LocalPlayer = game:GetService('Players').LocalPlayer
+
+-- Load Rayfield
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+-- Create Window
+local Window = Rayfield:CreateWindow({
+   Name = "Murder Mystery 2 Weapon Spawner",
+   LoadingTitle = "Loading MM2 Spawner",
+   LoadingSubtitle = "by KaiScripts",
+   ConfigurationSaving = {
+      Enabled = false,
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "noinvitelink", 
+      RememberJoins = true 
+   },
+   KeySystem = false
+})
+
+-- Create Main Tab
+local MainTab = Window:CreateTab("Spawner", 4483362458) 
+
+-- Variable to store the typed text
+local targetItemName = ""
+
+-- UI Elements
+MainTab:CreateParagraph({
+    Title = "Instructions", 
+    Content = "Spawn any items • Case-sensitive\nYT: KaizScripts"
+})
+
+local ItemInput = MainTab:CreateInput({
+   Name = "Item Name",
+   PlaceholderText = "e.g. HeartWand",
+   RemoveTextAfterFocusLost = false,
+   Callback = function(Text)
+       targetItemName = Text
+   end,
+})
+
+local SpawnButton = MainTab:CreateButton({
+   Name = "Spawn Item",
+   Callback = function()
+       -- Clean the input string
+       local itemName = targetItemName:match('^%s*(.-)%s*$')
+       
+       if itemName == "" then
+           Rayfield:Notify({
+               Title = "Input Error",
+               Content = "Please enter an item name first.",
+               Duration = 3,
+               Image = 4483362458,
+           })
+           return
+       end
+
+       -- Safely find the remote
+       local shop = ReplicatedStorage:WaitForChild('Remotes', 5) and ReplicatedStorage.Remotes:FindFirstChild('Shop')
+       local boxController = shop and shop:FindFirstChild('BoxController')
+
+       if boxController and boxController:IsA('RemoteEvent') then
+           boxController:FireServer('KnifeBox4', itemName)
+       else
+           warn("BoxController remote not found!")
+       end
+
+       -- Safely handle the local inventory addition
+       local success, profileData = pcall(function()
+           return require(ReplicatedStorage.Modules.ProfileData)
+       end)
+
+       if success and profileData and profileData.Weapons and profileData.Weapons.Owned then
+           local owned = profileData.Weapons.Owned
+           owned[itemName] = (owned[itemName] or 0) + 1 
+       else
+           warn("Could not find local inventory data.")
+       end
+
+       -- Reset character
+       if LocalPlayer.Character then
+           LocalPlayer.Character:BreakJoints()
+       end
+
+       -- Notify the user
+       Rayfield:Notify({
+           Title = "Item Spawned",
+           Content = "Spawned: " .. itemName,
+           Duration = 3,
+           Image = 4483362458,
+       })
+   end,
+})
+
+print('[KaiScripts MM2 Spawner] Rayfield GUI Loaded Successfully')
+
+
